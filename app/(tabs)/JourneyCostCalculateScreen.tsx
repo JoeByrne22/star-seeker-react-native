@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, Button, ActivityIndicator } from 'react-native';
 import { calculateJourneyCost } from '../services/apiService';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import styles from '../../styles';
 
 interface Transport {
   name: string;
@@ -69,26 +70,5 @@ const ExploreScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    justifyContent: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-  resultContainer: {
-    marginTop: 20,
-  },
-  resultText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default ExploreScreen;

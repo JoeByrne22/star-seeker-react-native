@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { fetchGatesData } from '../services/apiService';
 import { ThemedText } from '@/components/ThemedText';
+import styles from '../../styles';
 
 const HomeScreen = () => {
   const [gateInfo, setGateInfo] = useState([]);
@@ -35,10 +36,10 @@ const HomeScreen = () => {
         console.log('selectedGateIndex', selectedGateIndex);
       }}
     >
-      <Text style={styles.title}>{item.name}</Text>
+      <ThemedText type="subtitle">{item.name}</ThemedText>
       {selectedGateIndex === index && (
         <View>
-          <ThemedText type="subtitle">{item.code}</ThemedText>
+          <ThemedText type="default">{item.code}</ThemedText>
         </View>
       )}
     </TouchableOpacity>
@@ -55,20 +56,5 @@ const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  itemContainer: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default HomeScreen;

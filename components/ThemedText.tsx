@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TextProps, StyleSheet } from 'react-native';
 
 interface ThemedTextProps extends TextProps {
-  type: 'title' | 'subtitle' | 'defaultSemiBold' | 'default';
+  type: 'title' | 'subtitle' | 'defaultSemiBold' | 'default' | 'inputPlaceholder';
 }
 
 export const ThemedText: React.FC<ThemedTextProps> = ({ type, style, children, ...props }) => {
@@ -32,4 +32,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  inputPlaceholder: {
+    color: 'lightgray',
+    fontSize: 14,
+  }
 });

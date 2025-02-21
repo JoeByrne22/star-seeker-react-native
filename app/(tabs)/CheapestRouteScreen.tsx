@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
+import { View, Button, ActivityIndicator, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
 import { fetchGatesData, findCheapestRoute } from '../services/apiService';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import styles from '../../styles';
 
 const CheapestRouteScreen = () => {
   const [gateInfo, setGateInfo] = useState<Gate[]>([]);
@@ -69,7 +70,7 @@ const CheapestRouteScreen = () => {
         }
       }}
     >
-      <Text style={styles.itemText}>{item.name}</Text>
+      <ThemedText type="default">{item.name}</ThemedText>
     </TouchableOpacity>
   );
 
@@ -80,19 +81,18 @@ const CheapestRouteScreen = () => {
         style={styles.input}
         onPress={() => setIsSourceModalVisible(true)}
       >
-        <Text>{sourceGate ? gateInfo.find(gate => gate.code === sourceGate)?.name : 'Select Source Gate'}</Text>
+        <ThemedText type="inputPlaceholder">{sourceGate ? gateInfo.find(gate => gate.code === sourceGate)?.name : 'Select Source Gate'}</ThemedText>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.input}
         onPress={() => setIsTargetModalVisible(true)}
       >
-        <Text>{targetGate ? gateInfo.find(gate => gate.code === targetGate)?.name : 'Select Target Gate'}</Text>
+        <ThemedText type="inputPlaceholder">{targetGate ? gateInfo.find(gate => gate.code === targetGate)?.name : 'Select Target Gate'}</ThemedText>
       </TouchableOpacity>
       <Button title="Find Route" onPress={handleFindRoute} />
       {routeInfo && (
         <View style={styles.resultContainer}>
-          <Text style={styles.resultText}>Cheapest Route: {routeInfo.route}</Text>
-          <Text style={styles.resultText}>Cost: {routeInfo.cost}</Text>
+          <ThemedText type='subtitle'>Cheapest Route: {routeInfo.route}</ThemedText>
         </View>
       )}
       <Modal
@@ -116,41 +116,5 @@ const CheapestRouteScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    justifyContent: 'center',
-  },
-  input: {
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 16,
-    justifyContent: 'center',
-    paddingHorizontal: 8,
-  },
-  resultContainer: {
-    marginTop: 20,
-  },
-  resultText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  itemContainer: {
-    padding: 16,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  itemText: {
-    fontSize: 18,
-  },
-});
 
 export default CheapestRouteScreen;
